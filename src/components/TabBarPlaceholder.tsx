@@ -1,50 +1,92 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 
 export function TabBarPlaceholder() {
+  const [activeTab, setActiveTab] = useState("grid");
+
   return (
-    <View style={styles.tabBar}>
-      <View style={styles.tab}>
-        <Text style={styles.icon}>▦</Text>
-        <View style={styles.activeLine} />
-      </View>
+    <View style={styles.container}>
+      {/* POSTS GRID */}
+      <Pressable
+        style={styles.tab}
+        onPress={() => setActiveTab("grid")}
+      >
+        <Ionicons
+          name="grid-outline"
+          size={25}
+          color={activeTab === "grid" ? "black" : "#777"}
+        />
 
-      <View style={styles.tab}>
-        <Text style={styles.icon}>▶</Text>
-      </View>
+        {activeTab === "grid" && <View style={styles.activeLine} />}
+      </Pressable>
 
-      <View style={styles.tab}>
-        <Text style={styles.icon}>♙</Text>
-      </View>
+      {/* REELS */}
+      <Pressable
+        style={styles.tab}
+        onPress={() => setActiveTab("reels")}
+      >
+        <MaterialCommunityIcons
+          name="movie-open-play-outline"
+          size={27}
+          color={activeTab === "reels" ? "black" : "#777"}
+        />
+
+        {activeTab === "reels" && <View style={styles.activeLine} />}
+      </Pressable>
+
+      {/* REPOST */}
+      <Pressable
+        style={styles.tab}
+        onPress={() => setActiveTab("repost")}
+      >
+        <MaterialCommunityIcons
+          name="repeat"
+          size={27}
+          color={activeTab === "repost" ? "black" : "#777"}
+        />
+
+        {activeTab === "repost" && <View style={styles.activeLine} />}
+      </Pressable>
+
+      {/* TAGGED */}
+      <Pressable
+        style={styles.tab}
+        onPress={() => setActiveTab("tagged")}
+      >
+        <MaterialCommunityIcons
+          name="account-box-outline"
+          size={27}
+          color={activeTab === "tagged" ? "black" : "#777"}
+        />
+
+        {activeTab === "tagged" && <View style={styles.activeLine} />}
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  tabBar: {
+  container: {
+    height: 55,
     flexDirection: "row",
-    borderTopWidth: 1,
+    backgroundColor: "white",
+    borderTopWidth: 0.5,
     borderTopColor: "#ddd",
-    marginTop: 20,
   },
 
   tab: {
     flex: 1,
-    height: 52,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
     position: "relative",
-  },
-
-  icon: {
-    fontSize: 24,
-    color: "#333",
   },
 
   activeLine: {
     position: "absolute",
-    bottom: 0,
-    height: 2,
+    top: 0,
     width: "100%",
-    backgroundColor: "#111",
+    height: 1.5,
+    backgroundColor: "black",
   },
 });
